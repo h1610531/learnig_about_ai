@@ -137,3 +137,24 @@ print('accuracy_score:\n',accuracy_score(label_test.reshape(-1),pred_test))
 
 #混同行列を表示
 print('Confusion matrix:\n', confusion_matrix(label_test.reshape(-1),pred_test))
+
+
+#####################################
+#### 回帰問題
+
+from sklearn import linear_model
+
+
+###　1次式で回帰
+
+# x軸
+X1_TRAIN = x_train
+X1_TEST = x_test
+
+#学習
+model = linear_model.LinearRegression()
+model.fit(X1_TRAIN, y_train)
+
+#グラフに描写
+plt.plot(x_test,model.predict(X1_TEST), linestyle='-.',label='poly deg 1')
+
