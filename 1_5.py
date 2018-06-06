@@ -116,3 +116,24 @@ plt.legend(bbox_to_anchor=(1.05,1), loc='upper left',borderaxespad=0)
 
 #グラフを表示
 plt.show()
+
+### 学習
+
+from sklearn import svm
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+data_train = np.c_[x_train, y_train]
+data_test = np.c_[x_test, y_test]
+
+# SVMの分類気を作成、学習
+classifier = svm.SVC(gamma = 1)
+classifier.fit(data_train, label_train.reshape(-1))
+
+#Testデータで評価
+pred_test=classifier.predict(data_test)
+
+#Accuracyを表示
+print('accuracy_score:\n',accuracy_score(label_test.reshape(-1),pred_test))
+
+#混同行列を表示
+print('Confusion matrix:\n', confusion_matrix(label_test.reshape(-1),pred_test))
