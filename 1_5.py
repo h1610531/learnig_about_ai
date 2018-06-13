@@ -158,3 +158,48 @@ model.fit(X1_TRAIN, y_train)
 #グラフに描写
 plt.plot(x_test,model.predict(X1_TEST), linestyle='-.',label='poly deg 1')
 
+
+### ２次式で回帰
+
+#　X軸
+X2_TRAIN = np.c_[x_train**2, x_train]
+X2_TEST = np.c_[x_test**2, x_test]
+
+#学習
+model = linear_model.LinearRegression()
+model.fit(X2_TRAIN, y_train)
+
+#グラフに描写
+plt.plot(x_test,model.predict(X2_TEST),linestyle='--',label='poly deg 2')
+
+
+###９次式で回帰
+X9_TRAIN = np.c_[x_train**9,x_train**8,x_train**7,x_train**6,x_train**5,
+                 x_train**4,x_train**3,x_train**2,x_train]
+X9_TEST = np.c_[x_test**9,x_test**8,x_test**7,x_test**6,x_test**5,
+                x_test**4,x_test**3,x_test**2,x_test]
+#学習
+model = linear_model.LinearRegression()
+model.fit(X9_TRAIN,y_train)
+
+#グラフに描写
+plt.plot(x_test, model.predict(X9_TEST),linestyle='-',label='poly deg 9')
+
+
+### データの表示
+
+plt.scatter(x_train, y_train, c='black', s=30,marker='v', label='train')
+plt.scatter(x_test, y_test, c='black', s=30,marker='x', label='test')
+
+#元の線を表示
+plt.plot(data_x,data_ty, linestyle=':',label='non noise curve')
+
+#ｘ軸/y軸の範囲を設定
+plt.xlim(x_min,x_max)
+plt.ylim(y_min,y_max)
+
+#凡例の表示位置を指定
+plt.legend(bbox_to_anchor=(1.05,1),loc='upper left',borderaxespad=0)
+
+#グラフを表示
+plt.show()
