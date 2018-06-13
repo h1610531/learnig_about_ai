@@ -203,3 +203,36 @@ plt.legend(bbox_to_anchor=(1.05,1),loc='upper left',borderaxespad=0)
 
 #グラフを表示
 plt.show()
+
+
+########################################
+####クラスタリング
+
+from sklearn import cluster
+
+# x, y データを結合
+data=np.c_[data_x,data_vy]
+
+#３つのクラスタに分類
+model=cluster.KMeans(n_clusters=3)
+model.fit(data)
+
+# dataの分類結果(0~(n_clusters -1)の番号が付けられている)
+labels = model.labels_
+
+plt.scatter(data_x[labels==0],data_vy[labels == 0],c='black',s=30,marker='^',label='cluster 0')
+plt.scatter(data_x[labels==1],data_vy[labels == 1],c='black',s=30,marker='x',label='cluster 1')
+plt.scatter(data_x[labels==2],data_vy[labels == 2],c='black',s=30,marker='*',label='cluster 2')
+
+#元の線を表示
+plt.plot(data_x,data_ty,linestyle=':',label='non noise curve')
+
+#x軸/y軸の範囲を設定
+plt.xlim(x_min,x_max)
+plt.ylim(y_min,y_max)
+
+#凡例の表示位置を指定
+plt.legend(bbox_to_anchor=(1.05,1),loc='upper left',borderaxespad=0)
+
+#グラフを表示
+plt.show()
